@@ -125,9 +125,9 @@ No shouting. No manual intervention.
 
 If you’re standing on the job site trying to tell these three tools apart, here is the "cheat sheet":
 
--- *Terraform (The Architect):* "I push the blueprints to the site to build the foundation and walls." (Focus: Infrastructure)
--- *Ansible (The Foreman):* "I push specific orders to the workers whenever I want something done." (Focus: Tasks/Speed)
--- *Puppet (The Resident Guard):* "The workers pull the rules from the office and make sure the building stays exactly as it should be 24/7." (Focus: Stability/State)
+- *Terraform (The Architect):* "I push the blueprints to the site to build the foundation and walls." (Focus: Infrastructure)
+- *Ansible (The Foreman):* "I push specific orders to the workers whenever I want something done." (Focus: Tasks/Speed)
+- *Puppet (The Resident Guard):* "The workers pull the rules from the office and make sure the building stays exactly as it should be 24/7." (Focus: Stability/State)
 
 👉 Many real-world teams use **both together**:
 - **Ansible** for provisioning & deployments
