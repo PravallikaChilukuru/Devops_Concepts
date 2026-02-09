@@ -28,52 +28,34 @@ The **CMD** is the "Default Strength" setting on the machine.
 
 ## 2. How They Work Together
 
-When you run a Docker container, Docker combines them means ENTRYPOINT+CMD= THE FINAL ACTION
+When you run a Docker container, Docker combines them means 
+  - ENTRYPOINT+CMD= THE FINAL ACTION
 
 
 ### Configuration Table
 
 | Configuration | What it means | Resulting Command |
 |--------------|--------------|------------------|
-| ENTRYPOINT `brew` | The machine is a brewer | — |
-| CMD `espresso` | If the user says nothing, make espresso | — |
-
-
-### Runtime Behavior
-
-```
-docker run coffee-machine
-```
--- Machine makes Espresso
-
-```
-docker run coffee-machine latte
-```
--- Machine makes Latte
-> CMD Espresso is deleted and replaced.
-
+| ENTRYPOINT|  `brew` | The machine is a brewer |
+| CMD | `espresso` | If the user says nothing, make espresso |
+| User run| `docker run coffee-machine` | Machine makes Espresso |
+| User Overwrittable | `docker run coffee-machine latte` | Machine makes a latte. (The CMD espresso is deleted and replaced).|
 
 ## 3. Why Is ENTRYPOINT "Mandatory"? (The Truth)
 Technically, it is not mandatory. You can have a Dockerfile with only CMD.
 However, engineers treat it as "mandatory" in professional settings for two main reasons.
 
 ### Reason A: Preventing Mistakes (The "Safety" Factor)
-if you only use CMD ["python", "app.py"], a user could accidentally run docker run my-app bin/bash.
-
-Result: Your app doesn't start at all; instead, the user is just dropped into a blank terminal.
-
-With ENTRYPOINT: If you set ENTRYPOINT ["python"] and CMD ["app.py"], even if the user tries to mess with it, the container must run Python. It makes the container "foolproof."
+- if you only use CMD ["python", "app.py"], a user could accidentally run docker run my-app bin/bash.
+- Result: Your app doesn't start at all; instead, the user is just dropped into a blank terminal.
+- With ENTRYPOINT: If you set ENTRYPOINT ["python"] and CMD ["app.py"], even if the user tries to mess with it, the container must run Python. It makes the container "foolproof."
 
 ### Reason B: The "Exec" Mode
-When you use ENTRYPOINT, the container treats the application as the "Parent Process" (PID 1). This is vital because:
-
-If you want to stop the container gracefully (Ctrl+C), the ENTRYPOINT passes that signal directly to your app.
-
-Without it, your app might "hang" or refuse to shut down properly, like a machine that won't turn off when you hit the power button.
+- When you use ENTRYPOINT, the container treats the application as the "Parent Process" (PID 1). This is vital because:
+- If you want to stop the container gracefully (Ctrl+C), the ENTRYPOINT passes that signal directly to your app.
+- Without it, your app might "hang" or refuse to shut down properly, like a machine that won't turn off when you hit the power button.
 
 ## TL;DR 🚀
-ENTRYPOINT = The Tool (What it is). Hard to change.
-
-CMD = The Instruction (What it’s doing right now). Easy to change.
-
-Mandatory? No, but using it ensures your container acts like a reliable, specialized tool rather than a confused, empty box.
+- ENTRYPOINT = The Tool (What it is). Hard to change.
+- CMD = The Instruction (What it’s doing right now). Easy to change.
+- Mandatory? No, but using it ensures your container acts like a reliable, specialized tool rather than a confused, empty box.
