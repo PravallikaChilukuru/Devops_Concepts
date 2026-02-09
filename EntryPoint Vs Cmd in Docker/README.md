@@ -46,7 +46,7 @@ Technically, it is not mandatory. You can have a Dockerfile with only CMD.
 However, engineers treat it as "mandatory" in professional settings for two main reasons.
 
 ### Reason A: Preventing Mistakes (The "Safety" Factor)
-- if you only use CMD ["python", "app.py"], a user could accidentally run docker run my-app bin/bash.
+- if you only use CMD ["python", "app.py"], a user could accidentally run `docker run my-app bin/bash`.
 - Result: Your app doesn't start at all; instead, the user is just dropped into a blank terminal.
 - With ENTRYPOINT: If you set ENTRYPOINT ["python"] and CMD ["app.py"], even if the user tries to mess with it, the container must run Python. It makes the container "foolproof."
 
